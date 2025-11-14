@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/PlanetPuffer/FlutterGoDemo/backend/internal/proto/userpb";
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message RegisterResponse {
+  uint64 id = 1;
+  string email = 2;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  uint64 id = 1;
+  string email = 2;
+  string token = 3;
+}
+
+message GetUserRequest {
+  uint64 id = 1;
+}
+
+message GetUserResponse {
+  uint64 id = 1;
+  string email = 2;
+}
+
+service UserService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
