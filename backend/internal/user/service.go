@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"log"
 
@@ -27,7 +29,6 @@ func (s *UserServiceServer) Register(ctx context.Context, req *userpb.RegisterRe
 	u := User{
 		Email:        req.Email,
 		PasswordHash: string(hash),
-
 	}
 
 	if err := db.DB.Create(&u).Error; err != nil {
@@ -53,8 +54,11 @@ func (s *UserServiceServer) Login(ctx context.Context, req *userpb.LoginRequest)
 		return nil, errors.New("invalid credentials")
 	}
 
-	// still using fake token for now
-	token := "fake-token-" + u.Email
+	token, err := generateToken()
+	if err != nil {
+		log.Println("token generation error:", err)
+		return nil, err
+	}
 
 	return &userpb.LoginResponse{
 		Id:    uint64(u.ID),
@@ -74,4 +78,12 @@ func (s *UserServiceServer) GetUser(ctx context.Context, req *userpb.GetUserRequ
 		Id:    uint64(u.ID),
 		Email: u.Email,
 	}, nil
+}
+
+func generateToken() (string, error) {
+	b := make([]byte, 16) // 128 bits
+	if _, err := rand.Read(b); err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(b), nil
 }
