@@ -7,6 +7,8 @@ import (
 	"github.com/PlanetPuffer/FlutterGoDemo/backend/internal/db"
 	userpb "github.com/PlanetPuffer/FlutterGoDemo/backend/internal/proto"
 	"github.com/PlanetPuffer/FlutterGoDemo/backend/internal/user"
+	"github.com/PlanetPuffer/FlutterGoDemo/backend/internal/workout"
+
 	"google.golang.org/grpc"
 )
 
@@ -14,8 +16,11 @@ func main() {
 	// connect DB
 	db.Init()
 
-	// auto migrate User table
-	if err := db.DB.AutoMigrate(&user.User{}); err != nil {
+	// auto migrate User and WorkoutLog tables
+	if err := db.DB.AutoMigrate(
+		&user.User{},
+		&workout.WorkoutLog{},
+	); err != nil {
 		log.Fatalf("auto migrate failed: %v", err)
 	}
 

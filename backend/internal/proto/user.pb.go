@@ -333,6 +333,466 @@ func (x *GetUserResponse) GetEmail() string {
 	return ""
 }
 
+type WorkoutLogMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAtUnix int64                  `protobuf:"varint,4,opt,name=created_at_unix,json=createdAtUnix,proto3" json:"created_at_unix,omitempty"`
+	UpdatedAtUnix int64                  `protobuf:"varint,5,opt,name=updated_at_unix,json=updatedAtUnix,proto3" json:"updated_at_unix,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkoutLogMessage) Reset() {
+	*x = WorkoutLogMessage{}
+	mi := &file_user_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkoutLogMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkoutLogMessage) ProtoMessage() {}
+
+func (x *WorkoutLogMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkoutLogMessage.ProtoReflect.Descriptor instead.
+func (*WorkoutLogMessage) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *WorkoutLogMessage) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WorkoutLogMessage) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *WorkoutLogMessage) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *WorkoutLogMessage) GetCreatedAtUnix() int64 {
+	if x != nil {
+		return x.CreatedAtUnix
+	}
+	return 0
+}
+
+func (x *WorkoutLogMessage) GetUpdatedAtUnix() int64 {
+	if x != nil {
+		return x.UpdatedAtUnix
+	}
+	return 0
+}
+
+type ListWorkoutLogsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWorkoutLogsRequest) Reset() {
+	*x = ListWorkoutLogsRequest{}
+	mi := &file_user_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWorkoutLogsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWorkoutLogsRequest) ProtoMessage() {}
+
+func (x *ListWorkoutLogsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWorkoutLogsRequest.ProtoReflect.Descriptor instead.
+func (*ListWorkoutLogsRequest) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListWorkoutLogsRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type ListWorkoutLogsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Logs          []*WorkoutLogMessage   `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListWorkoutLogsResponse) Reset() {
+	*x = ListWorkoutLogsResponse{}
+	mi := &file_user_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListWorkoutLogsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWorkoutLogsResponse) ProtoMessage() {}
+
+func (x *ListWorkoutLogsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWorkoutLogsResponse.ProtoReflect.Descriptor instead.
+func (*ListWorkoutLogsResponse) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListWorkoutLogsResponse) GetLogs() []*WorkoutLogMessage {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+type CreateWorkoutLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateWorkoutLogRequest) Reset() {
+	*x = CreateWorkoutLogRequest{}
+	mi := &file_user_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateWorkoutLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWorkoutLogRequest) ProtoMessage() {}
+
+func (x *CreateWorkoutLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWorkoutLogRequest.ProtoReflect.Descriptor instead.
+func (*CreateWorkoutLogRequest) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CreateWorkoutLogRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateWorkoutLogRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type CreateWorkoutLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Log           *WorkoutLogMessage     `protobuf:"bytes,1,opt,name=log,proto3" json:"log,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateWorkoutLogResponse) Reset() {
+	*x = CreateWorkoutLogResponse{}
+	mi := &file_user_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateWorkoutLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWorkoutLogResponse) ProtoMessage() {}
+
+func (x *CreateWorkoutLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWorkoutLogResponse.ProtoReflect.Descriptor instead.
+func (*CreateWorkoutLogResponse) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CreateWorkoutLogResponse) GetLog() *WorkoutLogMessage {
+	if x != nil {
+		return x.Log
+	}
+	return nil
+}
+
+type UpdateWorkoutLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateWorkoutLogRequest) Reset() {
+	*x = UpdateWorkoutLogRequest{}
+	mi := &file_user_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateWorkoutLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateWorkoutLogRequest) ProtoMessage() {}
+
+func (x *UpdateWorkoutLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateWorkoutLogRequest.ProtoReflect.Descriptor instead.
+func (*UpdateWorkoutLogRequest) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateWorkoutLogRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateWorkoutLogRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateWorkoutLogRequest) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type UpdateWorkoutLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Log           *WorkoutLogMessage     `protobuf:"bytes,1,opt,name=log,proto3" json:"log,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateWorkoutLogResponse) Reset() {
+	*x = UpdateWorkoutLogResponse{}
+	mi := &file_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateWorkoutLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateWorkoutLogResponse) ProtoMessage() {}
+
+func (x *UpdateWorkoutLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateWorkoutLogResponse.ProtoReflect.Descriptor instead.
+func (*UpdateWorkoutLogResponse) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UpdateWorkoutLogResponse) GetLog() *WorkoutLogMessage {
+	if x != nil {
+		return x.Log
+	}
+	return nil
+}
+
+type DeleteWorkoutLogRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteWorkoutLogRequest) Reset() {
+	*x = DeleteWorkoutLogRequest{}
+	mi := &file_user_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteWorkoutLogRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteWorkoutLogRequest) ProtoMessage() {}
+
+func (x *DeleteWorkoutLogRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteWorkoutLogRequest.ProtoReflect.Descriptor instead.
+func (*DeleteWorkoutLogRequest) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *DeleteWorkoutLogRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *DeleteWorkoutLogRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type DeleteWorkoutLogResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteWorkoutLogResponse) Reset() {
+	*x = DeleteWorkoutLogResponse{}
+	mi := &file_user_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteWorkoutLogResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteWorkoutLogResponse) ProtoMessage() {}
+
+func (x *DeleteWorkoutLogResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteWorkoutLogResponse.ProtoReflect.Descriptor instead.
+func (*DeleteWorkoutLogResponse) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DeleteWorkoutLogResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 const file_user_proto_rawDesc = "" +
@@ -356,11 +816,41 @@ const file_user_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"7\n" +
 	"\x0fGetUserResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email2\xb2\x01\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\"\xa6\x01\n" +
+	"\x11WorkoutLogMessage\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12&\n" +
+	"\x0fcreated_at_unix\x18\x04 \x01(\x03R\rcreatedAtUnix\x12&\n" +
+	"\x0fupdated_at_unix\x18\x05 \x01(\x03R\rupdatedAtUnix\"1\n" +
+	"\x16ListWorkoutLogsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\"F\n" +
+	"\x17ListWorkoutLogsResponse\x12+\n" +
+	"\x04logs\x18\x01 \x03(\v2\x17.user.WorkoutLogMessageR\x04logs\"L\n" +
+	"\x17CreateWorkoutLogRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\"E\n" +
+	"\x18CreateWorkoutLogResponse\x12)\n" +
+	"\x03log\x18\x01 \x01(\v2\x17.user.WorkoutLogMessageR\x03log\"\\\n" +
+	"\x17UpdateWorkoutLogRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x18\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\"E\n" +
+	"\x18UpdateWorkoutLogResponse\x12)\n" +
+	"\x03log\x18\x01 \x01(\v2\x17.user.WorkoutLogMessageR\x03log\"B\n" +
+	"\x17DeleteWorkoutLogRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\"4\n" +
+	"\x18DeleteWorkoutLogResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xfb\x03\n" +
 	"\vUserService\x129\n" +
 	"\bRegister\x12\x15.user.RegisterRequest\x1a\x16.user.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.user.LoginRequest\x1a\x13.user.LoginResponse\x126\n" +
-	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponseBEZCgithub.com/PlanetPuffer/FlutterGoDemo/backend/internal/proto/userpbb\x06proto3"
+	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\x12Q\n" +
+	"\x10CreateWorkoutLog\x12\x1d.user.CreateWorkoutLogRequest\x1a\x1e.user.CreateWorkoutLogResponse\x12N\n" +
+	"\x0fListWorkoutLogs\x12\x1c.user.ListWorkoutLogsRequest\x1a\x1d.user.ListWorkoutLogsResponse\x12Q\n" +
+	"\x10UpdateWorkoutLog\x12\x1d.user.UpdateWorkoutLogRequest\x1a\x1e.user.UpdateWorkoutLogResponse\x12Q\n" +
+	"\x10DeleteWorkoutLog\x12\x1d.user.DeleteWorkoutLogRequest\x1a\x1e.user.DeleteWorkoutLogResponseBEZCgithub.com/PlanetPuffer/FlutterGoDemo/backend/internal/proto/userpbb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -374,27 +864,47 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_user_proto_goTypes = []any{
-	(*RegisterRequest)(nil),  // 0: user.RegisterRequest
-	(*RegisterResponse)(nil), // 1: user.RegisterResponse
-	(*LoginRequest)(nil),     // 2: user.LoginRequest
-	(*LoginResponse)(nil),    // 3: user.LoginResponse
-	(*GetUserRequest)(nil),   // 4: user.GetUserRequest
-	(*GetUserResponse)(nil),  // 5: user.GetUserResponse
+	(*RegisterRequest)(nil),          // 0: user.RegisterRequest
+	(*RegisterResponse)(nil),         // 1: user.RegisterResponse
+	(*LoginRequest)(nil),             // 2: user.LoginRequest
+	(*LoginResponse)(nil),            // 3: user.LoginResponse
+	(*GetUserRequest)(nil),           // 4: user.GetUserRequest
+	(*GetUserResponse)(nil),          // 5: user.GetUserResponse
+	(*WorkoutLogMessage)(nil),        // 6: user.WorkoutLogMessage
+	(*ListWorkoutLogsRequest)(nil),   // 7: user.ListWorkoutLogsRequest
+	(*ListWorkoutLogsResponse)(nil),  // 8: user.ListWorkoutLogsResponse
+	(*CreateWorkoutLogRequest)(nil),  // 9: user.CreateWorkoutLogRequest
+	(*CreateWorkoutLogResponse)(nil), // 10: user.CreateWorkoutLogResponse
+	(*UpdateWorkoutLogRequest)(nil),  // 11: user.UpdateWorkoutLogRequest
+	(*UpdateWorkoutLogResponse)(nil), // 12: user.UpdateWorkoutLogResponse
+	(*DeleteWorkoutLogRequest)(nil),  // 13: user.DeleteWorkoutLogRequest
+	(*DeleteWorkoutLogResponse)(nil), // 14: user.DeleteWorkoutLogResponse
 }
 var file_user_proto_depIdxs = []int32{
-	0, // 0: user.UserService.Register:input_type -> user.RegisterRequest
-	2, // 1: user.UserService.Login:input_type -> user.LoginRequest
-	4, // 2: user.UserService.GetUser:input_type -> user.GetUserRequest
-	1, // 3: user.UserService.Register:output_type -> user.RegisterResponse
-	3, // 4: user.UserService.Login:output_type -> user.LoginResponse
-	5, // 5: user.UserService.GetUser:output_type -> user.GetUserResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	6,  // 0: user.ListWorkoutLogsResponse.logs:type_name -> user.WorkoutLogMessage
+	6,  // 1: user.CreateWorkoutLogResponse.log:type_name -> user.WorkoutLogMessage
+	6,  // 2: user.UpdateWorkoutLogResponse.log:type_name -> user.WorkoutLogMessage
+	0,  // 3: user.UserService.Register:input_type -> user.RegisterRequest
+	2,  // 4: user.UserService.Login:input_type -> user.LoginRequest
+	4,  // 5: user.UserService.GetUser:input_type -> user.GetUserRequest
+	9,  // 6: user.UserService.CreateWorkoutLog:input_type -> user.CreateWorkoutLogRequest
+	7,  // 7: user.UserService.ListWorkoutLogs:input_type -> user.ListWorkoutLogsRequest
+	11, // 8: user.UserService.UpdateWorkoutLog:input_type -> user.UpdateWorkoutLogRequest
+	13, // 9: user.UserService.DeleteWorkoutLog:input_type -> user.DeleteWorkoutLogRequest
+	1,  // 10: user.UserService.Register:output_type -> user.RegisterResponse
+	3,  // 11: user.UserService.Login:output_type -> user.LoginResponse
+	5,  // 12: user.UserService.GetUser:output_type -> user.GetUserResponse
+	10, // 13: user.UserService.CreateWorkoutLog:output_type -> user.CreateWorkoutLogResponse
+	8,  // 14: user.UserService.ListWorkoutLogs:output_type -> user.ListWorkoutLogsResponse
+	12, // 15: user.UserService.UpdateWorkoutLog:output_type -> user.UpdateWorkoutLogResponse
+	14, // 16: user.UserService.DeleteWorkoutLog:output_type -> user.DeleteWorkoutLogResponse
+	10, // [10:17] is the sub-list for method output_type
+	3,  // [3:10] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -408,7 +918,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_proto_rawDesc), len(file_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

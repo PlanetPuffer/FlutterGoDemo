@@ -19,9 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_Register_FullMethodName = "/user.UserService/Register"
-	UserService_Login_FullMethodName    = "/user.UserService/Login"
-	UserService_GetUser_FullMethodName  = "/user.UserService/GetUser"
+	UserService_Register_FullMethodName         = "/user.UserService/Register"
+	UserService_Login_FullMethodName            = "/user.UserService/Login"
+	UserService_GetUser_FullMethodName          = "/user.UserService/GetUser"
+	UserService_CreateWorkoutLog_FullMethodName = "/user.UserService/CreateWorkoutLog"
+	UserService_ListWorkoutLogs_FullMethodName  = "/user.UserService/ListWorkoutLogs"
+	UserService_UpdateWorkoutLog_FullMethodName = "/user.UserService/UpdateWorkoutLog"
+	UserService_DeleteWorkoutLog_FullMethodName = "/user.UserService/DeleteWorkoutLog"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -31,6 +35,10 @@ type UserServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	CreateWorkoutLog(ctx context.Context, in *CreateWorkoutLogRequest, opts ...grpc.CallOption) (*CreateWorkoutLogResponse, error)
+	ListWorkoutLogs(ctx context.Context, in *ListWorkoutLogsRequest, opts ...grpc.CallOption) (*ListWorkoutLogsResponse, error)
+	UpdateWorkoutLog(ctx context.Context, in *UpdateWorkoutLogRequest, opts ...grpc.CallOption) (*UpdateWorkoutLogResponse, error)
+	DeleteWorkoutLog(ctx context.Context, in *DeleteWorkoutLogRequest, opts ...grpc.CallOption) (*DeleteWorkoutLogResponse, error)
 }
 
 type userServiceClient struct {
@@ -71,6 +79,46 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opt
 	return out, nil
 }
 
+func (c *userServiceClient) CreateWorkoutLog(ctx context.Context, in *CreateWorkoutLogRequest, opts ...grpc.CallOption) (*CreateWorkoutLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWorkoutLogResponse)
+	err := c.cc.Invoke(ctx, UserService_CreateWorkoutLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ListWorkoutLogs(ctx context.Context, in *ListWorkoutLogsRequest, opts ...grpc.CallOption) (*ListWorkoutLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWorkoutLogsResponse)
+	err := c.cc.Invoke(ctx, UserService_ListWorkoutLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateWorkoutLog(ctx context.Context, in *UpdateWorkoutLogRequest, opts ...grpc.CallOption) (*UpdateWorkoutLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWorkoutLogResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateWorkoutLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteWorkoutLog(ctx context.Context, in *DeleteWorkoutLogRequest, opts ...grpc.CallOption) (*DeleteWorkoutLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteWorkoutLogResponse)
+	err := c.cc.Invoke(ctx, UserService_DeleteWorkoutLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -78,6 +126,10 @@ type UserServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	CreateWorkoutLog(context.Context, *CreateWorkoutLogRequest) (*CreateWorkoutLogResponse, error)
+	ListWorkoutLogs(context.Context, *ListWorkoutLogsRequest) (*ListWorkoutLogsResponse, error)
+	UpdateWorkoutLog(context.Context, *UpdateWorkoutLogRequest) (*UpdateWorkoutLogResponse, error)
+	DeleteWorkoutLog(context.Context, *DeleteWorkoutLogRequest) (*DeleteWorkoutLogResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -96,6 +148,18 @@ func (UnimplementedUserServiceServer) Login(context.Context, *LoginRequest) (*Lo
 }
 func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedUserServiceServer) CreateWorkoutLog(context.Context, *CreateWorkoutLogRequest) (*CreateWorkoutLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkoutLog not implemented")
+}
+func (UnimplementedUserServiceServer) ListWorkoutLogs(context.Context, *ListWorkoutLogsRequest) (*ListWorkoutLogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkoutLogs not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateWorkoutLog(context.Context, *UpdateWorkoutLogRequest) (*UpdateWorkoutLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkoutLog not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteWorkoutLog(context.Context, *DeleteWorkoutLogRequest) (*DeleteWorkoutLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkoutLog not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -172,6 +236,78 @@ func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_CreateWorkoutLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkoutLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).CreateWorkoutLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_CreateWorkoutLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).CreateWorkoutLog(ctx, req.(*CreateWorkoutLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ListWorkoutLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkoutLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ListWorkoutLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ListWorkoutLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ListWorkoutLogs(ctx, req.(*ListWorkoutLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateWorkoutLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkoutLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateWorkoutLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateWorkoutLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateWorkoutLog(ctx, req.(*UpdateWorkoutLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteWorkoutLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWorkoutLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteWorkoutLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteWorkoutLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteWorkoutLog(ctx, req.(*DeleteWorkoutLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +326,22 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _UserService_GetUser_Handler,
+		},
+		{
+			MethodName: "CreateWorkoutLog",
+			Handler:    _UserService_CreateWorkoutLog_Handler,
+		},
+		{
+			MethodName: "ListWorkoutLogs",
+			Handler:    _UserService_ListWorkoutLogs_Handler,
+		},
+		{
+			MethodName: "UpdateWorkoutLog",
+			Handler:    _UserService_UpdateWorkoutLog_Handler,
+		},
+		{
+			MethodName: "DeleteWorkoutLog",
+			Handler:    _UserService_DeleteWorkoutLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
