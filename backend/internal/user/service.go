@@ -5,6 +5,8 @@ import (
 	"errors"
 	"log"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/PlanetPuffer/FlutterGoDemo/backend/internal/db"
 	userpb "github.com/PlanetPuffer/FlutterGoDemo/backend/internal/proto"
 )
@@ -13,11 +15,19 @@ type UserServiceServer struct {
 	userpb.UnimplementedUserServiceServer
 }
 
-// Note: this is for demo only!!! Passwords are stored as plain text here to reduce complexity.
+// Note: Password hashing added
 func (s *UserServiceServer) Register(ctx context.Context, req *userpb.RegisterRequest) (*userpb.RegisterResponse, error) {
+	// hash password before storing
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Println("bcrypt error:", err)
+		return nil, err
+	}
+
 	u := User{
 		Email:        req.Email,
-		PasswordHash: req.Password,
+		PasswordHash: string(hash),
+
 	}
 
 	if err := db.DB.Create(&u).Error; err != nil {
@@ -38,11 +48,12 @@ func (s *UserServiceServer) Login(ctx context.Context, req *userpb.LoginRequest)
 		return nil, err
 	}
 
-	if u.PasswordHash != req.Password {
+	// compare password with hash
+	if err := bcrypt.CompareHashAndPassword([]byte(u.PasswordHash), []byte(req.Password)); err != nil {
 		return nil, errors.New("invalid credentials")
 	}
 
-	// simple fake token for demo
+	// still using fake token for now
 	token := "fake-token-" + u.Email
 
 	return &userpb.LoginResponse{
