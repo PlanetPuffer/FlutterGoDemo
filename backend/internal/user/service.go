@@ -15,7 +15,7 @@ type UserServiceServer struct {
 	userpb.UnimplementedUserServiceServer
 }
 
-// Note: this is for demo only!!! Passwords are stored as plain text here to reduce complexity.
+// Note: Password hashing added
 func (s *UserServiceServer) Register(ctx context.Context, req *userpb.RegisterRequest) (*userpb.RegisterResponse, error) {
 	// hash password before storing
 	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
@@ -27,6 +27,7 @@ func (s *UserServiceServer) Register(ctx context.Context, req *userpb.RegisterRe
 	u := User{
 		Email:        req.Email,
 		PasswordHash: string(hash),
+
 	}
 
 	if err := db.DB.Create(&u).Error; err != nil {
