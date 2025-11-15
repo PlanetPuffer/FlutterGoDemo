@@ -15,6 +15,7 @@ func toWorkoutLogMessage(m *workout.WorkoutLog) *userpb.WorkoutLogMessage {
 		Id:            uint64(m.ID),
 		UserId:        uint64(m.UserID),
 		Content:       m.Content,
+		Category:      m.Category,
 		CreatedAtUnix: m.CreatedAt.Unix(),
 		UpdatedAtUnix: m.UpdatedAt.Unix(),
 	}
@@ -25,8 +26,9 @@ func (s *UserServiceServer) CreateWorkoutLog(
 	req *userpb.CreateWorkoutLogRequest,
 ) (*userpb.CreateWorkoutLogResponse, error) {
 	logEntry := workout.WorkoutLog{
-		UserID:  uint(req.UserId),
-		Content: req.Content,
+		UserID:   uint(req.UserId),
+		Content:  req.Content,
+		Category: req.Category,
 	}
 
 	if err := db.DB.Create(&logEntry).Error; err != nil {
@@ -78,6 +80,7 @@ func (s *UserServiceServer) UpdateWorkoutLog(
 	}
 
 	logEntry.Content = req.Content
+	logEntry.Category = req.Category
 	logEntry.UpdatedAt = time.Now()
 
 	if err := db.DB.Save(&logEntry).Error; err != nil {

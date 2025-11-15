@@ -422,6 +422,7 @@ class WorkoutLogMessage extends $pb.GeneratedMessage {
     $fixnum.Int64? id,
     $fixnum.Int64? userId,
     $core.String? content,
+    $core.String? category,
     $fixnum.Int64? createdAtUnix,
     $fixnum.Int64? updatedAtUnix,
   }) {
@@ -429,6 +430,7 @@ class WorkoutLogMessage extends $pb.GeneratedMessage {
     if (id != null) result.id = id;
     if (userId != null) result.userId = userId;
     if (content != null) result.content = content;
+    if (category != null) result.category = category;
     if (createdAtUnix != null) result.createdAtUnix = createdAtUnix;
     if (updatedAtUnix != null) result.updatedAtUnix = updatedAtUnix;
     return result;
@@ -452,8 +454,9 @@ class WorkoutLogMessage extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'content')
-    ..aInt64(4, _omitFieldNames ? '' : 'createdAtUnix')
-    ..aInt64(5, _omitFieldNames ? '' : 'updatedAtUnix')
+    ..aOS(4, _omitFieldNames ? '' : 'category')
+    ..aInt64(5, _omitFieldNames ? '' : 'createdAtUnix')
+    ..aInt64(6, _omitFieldNames ? '' : 'updatedAtUnix')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -503,22 +506,31 @@ class WorkoutLogMessage extends $pb.GeneratedMessage {
   void clearContent() => clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get createdAtUnix => $_getI64(3);
+  $core.String get category => $_getSZ(3);
   @$pb.TagNumber(4)
-  set createdAtUnix($fixnum.Int64 value) => $_setInt64(3, value);
+  set category($core.String value) => $_setString(3, value);
   @$pb.TagNumber(4)
-  $core.bool hasCreatedAtUnix() => $_has(3);
+  $core.bool hasCategory() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCreatedAtUnix() => clearField(4);
+  void clearCategory() => clearField(4);
 
   @$pb.TagNumber(5)
-  $fixnum.Int64 get updatedAtUnix => $_getI64(4);
+  $fixnum.Int64 get createdAtUnix => $_getI64(4);
   @$pb.TagNumber(5)
-  set updatedAtUnix($fixnum.Int64 value) => $_setInt64(4, value);
+  set createdAtUnix($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasUpdatedAtUnix() => $_has(4);
+  $core.bool hasCreatedAtUnix() => $_has(4);
   @$pb.TagNumber(5)
-  void clearUpdatedAtUnix() => clearField(5);
+  void clearCreatedAtUnix() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get updatedAtUnix => $_getI64(5);
+  @$pb.TagNumber(6)
+  set updatedAtUnix($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasUpdatedAtUnix() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUpdatedAtUnix() => clearField(6);
 }
 
 class ListWorkoutLogsRequest extends $pb.GeneratedMessage {
@@ -596,16 +608,13 @@ class ListWorkoutLogsResponse extends $pb.GeneratedMessage {
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-    _omitMessageNames ? '' : 'ListWorkoutLogsResponse',
-    package: const $pb.PackageName(_omitMessageNames ? '' : 'user'),
-    createEmptyInstance: create)
-  ..pc<WorkoutLogMessage>(
-    1,
-    _omitFieldNames ? '' : 'logs',
-    $pb.PbFieldType.PM,
-    subBuilder: WorkoutLogMessage.create,
-  )
-  ..hasRequiredFields = false;
+      _omitMessageNames ? '' : 'ListWorkoutLogsResponse',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'user'),
+      createEmptyInstance: create)
+    ..pc<WorkoutLogMessage>(1, _omitFieldNames ? '' : 'logs',
+        $pb.PbFieldType.PM,
+        subBuilder: WorkoutLogMessage.create)
+    ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ListWorkoutLogsResponse clone() => deepCopy();
@@ -628,17 +637,18 @@ class ListWorkoutLogsResponse extends $pb.GeneratedMessage {
   static ListWorkoutLogsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-$core.List<WorkoutLogMessage> get logs => $_getList(0);
-}
+$core.List<WorkoutLogMessage> get logs => $_getList(0);}
 
 class CreateWorkoutLogRequest extends $pb.GeneratedMessage {
   factory CreateWorkoutLogRequest({
     $fixnum.Int64? userId,
     $core.String? content,
+    $core.String? category,
   }) {
     final result = create();
     if (userId != null) result.userId = userId;
     if (content != null) result.content = content;
+    if (category != null) result.category = category;
     return result;
   }
 
@@ -658,6 +668,7 @@ class CreateWorkoutLogRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(2, _omitFieldNames ? '' : 'content')
+    ..aOS(3, _omitFieldNames ? '' : 'category')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -697,6 +708,15 @@ class CreateWorkoutLogRequest extends $pb.GeneratedMessage {
   $core.bool hasContent() => $_has(1);
   @$pb.TagNumber(2)
   void clearContent() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get category => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set category($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasCategory() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCategory() => clearField(3);
 }
 
 class CreateWorkoutLogResponse extends $pb.GeneratedMessage {
@@ -762,11 +782,13 @@ class UpdateWorkoutLogRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? id,
     $fixnum.Int64? userId,
     $core.String? content,
+    $core.String? category,
   }) {
     final result = create();
     if (id != null) result.id = id;
     if (userId != null) result.userId = userId;
     if (content != null) result.content = content;
+    if (category != null) result.category = category;
     return result;
   }
 
@@ -788,6 +810,7 @@ class UpdateWorkoutLogRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(3, _omitFieldNames ? '' : 'content')
+    ..aOS(4, _omitFieldNames ? '' : 'category')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -836,6 +859,15 @@ class UpdateWorkoutLogRequest extends $pb.GeneratedMessage {
   $core.bool hasContent() => $_has(2);
   @$pb.TagNumber(3)
   void clearContent() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get category => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set category($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCategory() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCategory() => clearField(4);
 }
 
 class UpdateWorkoutLogResponse extends $pb.GeneratedMessage {

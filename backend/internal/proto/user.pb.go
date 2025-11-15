@@ -338,8 +338,9 @@ type WorkoutLogMessage struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAtUnix int64                  `protobuf:"varint,4,opt,name=created_at_unix,json=createdAtUnix,proto3" json:"created_at_unix,omitempty"`
-	UpdatedAtUnix int64                  `protobuf:"varint,5,opt,name=updated_at_unix,json=updatedAtUnix,proto3" json:"updated_at_unix,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	CreatedAtUnix int64                  `protobuf:"varint,5,opt,name=created_at_unix,json=createdAtUnix,proto3" json:"created_at_unix,omitempty"`
+	UpdatedAtUnix int64                  `protobuf:"varint,6,opt,name=updated_at_unix,json=updatedAtUnix,proto3" json:"updated_at_unix,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -391,6 +392,13 @@ func (x *WorkoutLogMessage) GetUserId() uint64 {
 func (x *WorkoutLogMessage) GetContent() string {
 	if x != nil {
 		return x.Content
+	}
+	return ""
+}
+
+func (x *WorkoutLogMessage) GetCategory() string {
+	if x != nil {
+		return x.Category
 	}
 	return ""
 }
@@ -501,6 +509,7 @@ type CreateWorkoutLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -545,6 +554,13 @@ func (x *CreateWorkoutLogRequest) GetUserId() uint64 {
 func (x *CreateWorkoutLogRequest) GetContent() string {
 	if x != nil {
 		return x.Content
+	}
+	return ""
+}
+
+func (x *CreateWorkoutLogRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
 	}
 	return ""
 }
@@ -598,6 +614,7 @@ type UpdateWorkoutLogRequest struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -649,6 +666,13 @@ func (x *UpdateWorkoutLogRequest) GetUserId() uint64 {
 func (x *UpdateWorkoutLogRequest) GetContent() string {
 	if x != nil {
 		return x.Content
+	}
+	return ""
+}
+
+func (x *UpdateWorkoutLogRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
 	}
 	return ""
 }
@@ -816,26 +840,29 @@ const file_user_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"7\n" +
 	"\x0fGetUserResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\"\xa6\x01\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\"\xc2\x01\n" +
 	"\x11WorkoutLogMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\x12&\n" +
-	"\x0fcreated_at_unix\x18\x04 \x01(\x03R\rcreatedAtUnix\x12&\n" +
-	"\x0fupdated_at_unix\x18\x05 \x01(\x03R\rupdatedAtUnix\"1\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12&\n" +
+	"\x0fcreated_at_unix\x18\x05 \x01(\x03R\rcreatedAtUnix\x12&\n" +
+	"\x0fupdated_at_unix\x18\x06 \x01(\x03R\rupdatedAtUnix\"1\n" +
 	"\x16ListWorkoutLogsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\"F\n" +
 	"\x17ListWorkoutLogsResponse\x12+\n" +
-	"\x04logs\x18\x01 \x03(\v2\x17.user.WorkoutLogMessageR\x04logs\"L\n" +
+	"\x04logs\x18\x01 \x03(\v2\x17.user.WorkoutLogMessageR\x04logs\"h\n" +
 	"\x17CreateWorkoutLogRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"E\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1a\n" +
+	"\bcategory\x18\x03 \x01(\tR\bcategory\"E\n" +
 	"\x18CreateWorkoutLogResponse\x12)\n" +
-	"\x03log\x18\x01 \x01(\v2\x17.user.WorkoutLogMessageR\x03log\"\\\n" +
+	"\x03log\x18\x01 \x01(\v2\x17.user.WorkoutLogMessageR\x03log\"x\n" +
 	"\x17UpdateWorkoutLogRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\"E\n" +
+	"\acontent\x18\x03 \x01(\tR\acontent\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\"E\n" +
 	"\x18UpdateWorkoutLogResponse\x12)\n" +
 	"\x03log\x18\x01 \x01(\v2\x17.user.WorkoutLogMessageR\x03log\"B\n" +
 	"\x17DeleteWorkoutLogRequest\x12\x0e\n" +
