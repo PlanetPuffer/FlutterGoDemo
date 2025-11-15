@@ -104,17 +104,18 @@ const WorkoutLogMessage$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     {'1': 'user_id', '3': 2, '4': 1, '5': 4, '10': 'userId'},
     {'1': 'content', '3': 3, '4': 1, '5': 9, '10': 'content'},
-    {'1': 'created_at_unix', '3': 4, '4': 1, '5': 3, '10': 'createdAtUnix'},
-    {'1': 'updated_at_unix', '3': 5, '4': 1, '5': 3, '10': 'updatedAtUnix'},
+    {'1': 'category', '3': 4, '4': 1, '5': 9, '10': 'category'},
+    {'1': 'created_at_unix', '3': 5, '4': 1, '5': 3, '10': 'createdAtUnix'},
+    {'1': 'updated_at_unix', '3': 6, '4': 1, '5': 3, '10': 'updatedAtUnix'},
   ],
 };
 
 /// Descriptor for `WorkoutLogMessage`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List workoutLogMessageDescriptor = $convert.base64Decode(
     'ChFXb3Jrb3V0TG9nTWVzc2FnZRIOCgJpZBgBIAEoBFICaWQSFwoHdXNlcl9pZBgCIAEoBFIGdX'
-    'NlcklkEhgKB2NvbnRlbnQYAyABKAlSB2NvbnRlbnQSJgoPY3JlYXRlZF9hdF91bml4GAQgASgD'
-    'Ug1jcmVhdGVkQXRVbml4EiYKD3VwZGF0ZWRfYXRfdW5peBgFIAEoA1INdXBkYXRlZEF0VW5peA'
-    '==');
+    'NlcklkEhgKB2NvbnRlbnQYAyABKAlSB2NvbnRlbnQSGgoIY2F0ZWdvcnkYBCABKAlSCGNhdGVn'
+    'b3J5EiYKD2NyZWF0ZWRfYXRfdW5peBgFIAEoA1INY3JlYXRlZEF0VW5peBImCg91cGRhdGVkX2'
+    'F0X3VuaXgYBiABKANSDXVwZGF0ZWRBdFVuaXg=');
 
 @$core.Deprecated('Use listWorkoutLogsRequestDescriptor instead')
 const ListWorkoutLogsRequest$json = {
@@ -156,6 +157,7 @@ const CreateWorkoutLogRequest$json = {
   '2': [
     {'1': 'user_id', '3': 1, '4': 1, '5': 4, '10': 'userId'},
     {'1': 'content', '3': 2, '4': 1, '5': 9, '10': 'content'},
+    {'1': 'category', '3': 3, '4': 1, '5': 9, '10': 'category'},
   ],
 };
 
@@ -163,7 +165,7 @@ const CreateWorkoutLogRequest$json = {
 final $typed_data.Uint8List createWorkoutLogRequestDescriptor =
     $convert.base64Decode(
         'ChdDcmVhdGVXb3Jrb3V0TG9nUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgEUgZ1c2VySWQSGAoHY2'
-        '9udGVudBgCIAEoCVIHY29udGVudA==');
+        '9udGVudBgCIAEoCVIHY29udGVudBIaCghjYXRlZ29yeRgDIAEoCVIIY2F0ZWdvcnk=');
 
 @$core.Deprecated('Use createWorkoutLogResponseDescriptor instead')
 const CreateWorkoutLogResponse$json = {
@@ -193,14 +195,15 @@ const UpdateWorkoutLogRequest$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 4, '10': 'id'},
     {'1': 'user_id', '3': 2, '4': 1, '5': 4, '10': 'userId'},
     {'1': 'content', '3': 3, '4': 1, '5': 9, '10': 'content'},
+    {'1': 'category', '3': 4, '4': 1, '5': 9, '10': 'category'},
   ],
 };
 
 /// Descriptor for `UpdateWorkoutLogRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateWorkoutLogRequestDescriptor =
-    $convert.base64Decode(
-        'ChdVcGRhdGVXb3Jrb3V0TG9nUmVxdWVzdBIOCgJpZBgBIAEoBFICaWQSFwoHdXNlcl9pZBgCIA'
-        'EoBFIGdXNlcklkEhgKB2NvbnRlbnQYAyABKAlSB2NvbnRlbnQ=');
+final $typed_data.Uint8List updateWorkoutLogRequestDescriptor = $convert.base64Decode(
+    'ChdVcGRhdGVXb3Jrb3V0TG9nUmVxdWVzdBIOCgJpZBgBIAEoBFICaWQSFwoHdXNlcl9pZBgCIA'
+    'EoBFIGdXNlcklkEhgKB2NvbnRlbnQYAyABKAlSB2NvbnRlbnQSGgoIY2F0ZWdvcnkYBCABKAlS'
+    'CGNhdGVnb3J5');
 
 @$core.Deprecated('Use updateWorkoutLogResponseDescriptor instead')
 const UpdateWorkoutLogResponse$json = {

@@ -101,3 +101,4 @@ Expected log output:
 connected to database
 gRPC server listening on :50051
 ```
+
