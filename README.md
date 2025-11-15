@@ -35,7 +35,7 @@ brew services start postgresql@16
 ### Create the database and grant permissions:
 
 ```bash
-psql postgres
+psql sample_db
 ```
 ### In the psql prompt:
 
@@ -101,4 +101,6 @@ Expected log output:
 connected to database
 gRPC server listening on :50051
 ```
+
+# Frontend Services (Flutter)
 

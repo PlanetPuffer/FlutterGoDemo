@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"log"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 
@@ -49,6 +50,10 @@ func (s *UserServiceServer) Login(ctx context.Context, req *userpb.LoginRequest)
 		return nil, err
 	}
 
+	if !u.Active {
+		return nil, errors.New("account is deactivated")
+	}
+
 	// compare password with hash
 	if err := bcrypt.CompareHashAndPassword([]byte(u.PasswordHash), []byte(req.Password)); err != nil {
 		return nil, errors.New("invalid credentials")
@@ -77,6 +82,84 @@ func (s *UserServiceServer) GetUser(ctx context.Context, req *userpb.GetUserRequ
 	return &userpb.GetUserResponse{
 		Id:    uint64(u.ID),
 		Email: u.Email,
+	}, nil
+}
+
+func (s *UserServiceServer) GetProfile(ctx context.Context, req *userpb.GetProfileRequest) (*userpb.GetProfileResponse, error) {
+	var u User
+	if err := db.DB.First(&u, req.UserId).Error; err != nil {
+		log.Println("GetProfile error:", err)
+		return nil, err
+	}
+
+	var dobIso string
+	if u.DateOfBirth != nil {
+		dobIso = u.DateOfBirth.Format("2006-01-02")
+	}
+
+	return &userpb.GetProfileResponse{
+		UserId: req.UserId,
+		Email:  u.Email,
+		Name:   u.Name,
+		DobIso: dobIso,
+	}, nil
+}
+
+func (s *UserServiceServer) UpdateProfile(ctx context.Context, req *userpb.UpdateProfileRequest) (*userpb.UpdateProfileResponse, error) {
+	var u User
+	if err := db.DB.First(&u, req.UserId).Error; err != nil {
+		log.Println("UpdateProfile error:", err)
+		return nil, err
+	}
+
+	u.Email = req.Email
+	u.Name = req.Name
+
+	if req.DobIso == "" {
+		u.DateOfBirth = nil
+	} else {
+		t, err := time.Parse("2006-01-02", req.DobIso)
+		if err != nil {
+			log.Println("UpdateProfile parse dob error:", err)
+			return nil, err
+		}
+		u.DateOfBirth = &t
+	}
+
+	if err := db.DB.Save(&u).Error; err != nil {
+		log.Println("UpdateProfile save error:", err)
+		return nil, err
+	}
+
+	var dobIso string
+	if u.DateOfBirth != nil {
+		dobIso = u.DateOfBirth.Format("2006-01-02")
+	}
+
+	return &userpb.UpdateProfileResponse{
+		UserId: req.UserId,
+		Email:  u.Email,
+		Name:   u.Name,
+		DobIso: dobIso,
+	}, nil
+}
+
+func (s *UserServiceServer) DeactivateAccount(ctx context.Context, req *userpb.DeactivateAccountRequest) (*userpb.DeactivateAccountResponse, error) {
+	var u User
+	if err := db.DB.First(&u, req.UserId).Error; err != nil {
+		log.Println("DeactivateAccount find user error:", err)
+		return nil, err
+	}
+
+	u.Active = false
+
+	if err := db.DB.Save(&u).Error; err != nil {
+		log.Println("DeactivateAccount save error:", err)
+		return nil, err
+	}
+
+	return &userpb.DeactivateAccountResponse{
+		Success: true,
 	}, nil
 }
 

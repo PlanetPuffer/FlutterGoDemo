@@ -83,8 +83,9 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => WorkoutLogPage(
-            userId: resp.id.toInt(),
-            token: resp.token,
+          userId: resp.id.toInt(),
+          token: resp.token,
+          email: _emailController.text.trim(),
           ),
         ),
       );
