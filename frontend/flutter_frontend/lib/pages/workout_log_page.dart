@@ -8,8 +8,9 @@ import '../services/grpc_client.dart';
 import '../constants/workout_categories.dart';
 import '../widgets/edit_log_dialog.dart';
 import 'login_page.dart';
+import 'account_page.dart';
 
-// Done and not-done helpers
+// Done and not done helpers
 bool _isLogDone(WorkoutLogMessage log) {
   return log.content.trimLeft().startsWith('[x]');
 }
@@ -46,10 +47,12 @@ class WorkoutLogPage extends StatefulWidget {
     super.key,
     required this.userId,
     required this.token,
+    required this.email,
   });
 
   final int userId;
   final String token;
+  final String email;
 
   @override
   State<WorkoutLogPage> createState() => _WorkoutLogPageState();
@@ -65,16 +68,21 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
   bool _isLoading = false;
   String _status = '';
 
-  String _selectedCategory = workoutCategories.last; // default "Other"
+  String _selectedCategory = workoutCategories.last; // default is "Other"
   String _searchQuery = '';
   String _filterCategory = 'All';
   LogSortMode _sortMode = LogSortMode.newestFirst;
+
+  String? _userName;
+  String? _userEmailOverride;
+  DateTime? _dob;
 
   @override
   void initState() {
     super.initState();
     _channel = createChannel();
     _stub = UserServiceClient(_channel);
+    _userEmailOverride = widget.email;
     _loadLogs();
   }
 
@@ -288,7 +296,35 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
     );
   }
 
-  // ---------- Date-aware search + sort ----------
+  Future<void> _openAccountPage() async {
+    final result = await Navigator.of(context).push<AccountPageResult>(
+      MaterialPageRoute(
+        builder: (_) => AccountPage(
+          userId: widget.userId,
+          token: widget.token,
+          initialName: _userName ?? '',
+          initialEmail: _userEmailOverride ?? widget.email,
+          initialDob: _dob,
+        ),
+      ),
+    );
+
+    if (result == null) return;
+
+    if (result.deactivated) {
+      _logout();
+      return;
+    }
+
+    setState(() {
+      final trimmedName = result.name?.trim() ?? '';
+      _userName = trimmedName.isEmpty ? null : trimmedName;
+      _userEmailOverride = result.email ?? _userEmailOverride;
+      _dob = result.dob;
+    });
+  }
+
+  // ---------- Date-aware search + sort. Allows user to search using 2025, 2025-11, or 2025-11-22 ----------
 
   bool _matchesDateQuery(WorkoutLogMessage log, String rawQuery) {
     if (rawQuery.isEmpty) return true;
@@ -355,10 +391,19 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
       }
     });
 
+    final titleText = (_userName == null || _userName!.isEmpty)
+        ? 'Workout Logger'
+        : 'Welcome ${_userName!}';
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Workout Logger'),
+        title: Text(titleText),
         actions: [
+          IconButton(
+            onPressed: _openAccountPage,
+            icon: const Icon(Icons.account_circle),
+            tooltip: 'Account',
+          ),
           IconButton(
             onPressed: _logout,
             icon: const Icon(Icons.logout),
@@ -419,7 +464,8 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
                     Expanded(
                       child: TextField(
                         decoration: const InputDecoration(
-                          hintText: 'Search logs or type date (YYYY, YYYY-MM, YYYY-MM-DD)',
+                          hintText:
+                              'Search logs or type date (YYYY, YYYY-MM, YYYY-MM-DD)',
                           prefixIcon: Icon(Icons.search),
                           border: OutlineInputBorder(),
                         ),

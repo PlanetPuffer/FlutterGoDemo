@@ -53,6 +53,27 @@ class UserServiceClient extends $grpc.Client {
     return $createUnaryCall(_$getUser, request, options: options);
   }
 
+  $grpc.ResponseFuture<$0.GetProfileResponse> getProfile(
+    $0.GetProfileRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$getProfile, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.UpdateProfileResponse> updateProfile(
+    $0.UpdateProfileRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$updateProfile, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.DeactivateAccountResponse> deactivateAccount(
+    $0.DeactivateAccountRequest request, {
+    $grpc.CallOptions? options,
+  }) {
+    return $createUnaryCall(_$deactivateAccount, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.CreateWorkoutLogResponse> createWorkoutLog(
     $0.CreateWorkoutLogRequest request, {
     $grpc.CallOptions? options,
@@ -97,6 +118,21 @@ class UserServiceClient extends $grpc.Client {
           '/user.UserService/GetUser',
           ($0.GetUserRequest value) => value.writeToBuffer(),
           $0.GetUserResponse.fromBuffer);
+  static final _$getProfile =
+      $grpc.ClientMethod<$0.GetProfileRequest, $0.GetProfileResponse>(
+          '/user.UserService/GetProfile',
+          ($0.GetProfileRequest value) => value.writeToBuffer(),
+          $0.GetProfileResponse.fromBuffer);
+  static final _$updateProfile =
+      $grpc.ClientMethod<$0.UpdateProfileRequest, $0.UpdateProfileResponse>(
+          '/user.UserService/UpdateProfile',
+          ($0.UpdateProfileRequest value) => value.writeToBuffer(),
+          $0.UpdateProfileResponse.fromBuffer);
+  static final _$deactivateAccount = $grpc.ClientMethod<
+          $0.DeactivateAccountRequest, $0.DeactivateAccountResponse>(
+      '/user.UserService/DeactivateAccount',
+      ($0.DeactivateAccountRequest value) => value.writeToBuffer(),
+      $0.DeactivateAccountResponse.fromBuffer);
   static final _$createWorkoutLog = $grpc.ClientMethod<
           $0.CreateWorkoutLogRequest, $0.CreateWorkoutLogResponse>(
       '/user.UserService/CreateWorkoutLog',
@@ -145,6 +181,31 @@ abstract class UserServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetUserRequest.fromBuffer(value),
         ($0.GetUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetProfileRequest, $0.GetProfileResponse>(
+        'GetProfile',
+        getProfile_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.GetProfileRequest.fromBuffer(value),
+        ($0.GetProfileResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$0.UpdateProfileRequest, $0.UpdateProfileResponse>(
+            'UpdateProfile',
+            updateProfile_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $0.UpdateProfileRequest.fromBuffer(value),
+            ($0.UpdateProfileResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.DeactivateAccountRequest,
+            $0.DeactivateAccountResponse>(
+        'DeactivateAccount',
+        deactivateAccount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.DeactivateAccountRequest.fromBuffer(value),
+        ($0.DeactivateAccountResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.CreateWorkoutLogRequest,
             $0.CreateWorkoutLogResponse>(
         'CreateWorkoutLog',
@@ -206,6 +267,32 @@ abstract class UserServiceBase extends $grpc.Service {
 
   $async.Future<$0.GetUserResponse> getUser(
       $grpc.ServiceCall call, $0.GetUserRequest request);
+
+  $async.Future<$0.GetProfileResponse> getProfile_Pre($grpc.ServiceCall $call,
+      $async.Future<$0.GetProfileRequest> $request) async {
+    return getProfile($call, await $request);
+  }
+
+  $async.Future<$0.GetProfileResponse> getProfile(
+      $grpc.ServiceCall call, $0.GetProfileRequest request);
+
+  $async.Future<$0.UpdateProfileResponse> updateProfile_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$0.UpdateProfileRequest> $request) async {
+    return updateProfile($call, await $request);
+  }
+
+  $async.Future<$0.UpdateProfileResponse> updateProfile(
+      $grpc.ServiceCall call, $0.UpdateProfileRequest request);
+
+  $async.Future<$0.DeactivateAccountResponse> deactivateAccount_Pre(
+      $grpc.ServiceCall $call,
+      $async.Future<$0.DeactivateAccountRequest> $request) async {
+    return deactivateAccount($call, await $request);
+  }
+
+  $async.Future<$0.DeactivateAccountResponse> deactivateAccount(
+      $grpc.ServiceCall call, $0.DeactivateAccountRequest request);
 
   $async.Future<$0.CreateWorkoutLogResponse> createWorkoutLog_Pre(
       $grpc.ServiceCall $call,

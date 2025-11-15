@@ -97,6 +97,95 @@ final $typed_data.Uint8List getUserResponseDescriptor = $convert.base64Decode(
     'Cg9HZXRVc2VyUmVzcG9uc2USDgoCaWQYASABKARSAmlkEhQKBWVtYWlsGAIgASgJUgVlbWFpbA'
     '==');
 
+@$core.Deprecated('Use deactivateAccountRequestDescriptor instead')
+const DeactivateAccountRequest$json = {
+  '1': 'DeactivateAccountRequest',
+  '2': [
+    {'1': 'user_id', '3': 1, '4': 1, '5': 4, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `DeactivateAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deactivateAccountRequestDescriptor =
+    $convert.base64Decode(
+        'ChhEZWFjdGl2YXRlQWNjb3VudFJlcXVlc3QSFwoHdXNlcl9pZBgBIAEoBFIGdXNlcklk');
+
+@$core.Deprecated('Use deactivateAccountResponseDescriptor instead')
+const DeactivateAccountResponse$json = {
+  '1': 'DeactivateAccountResponse',
+  '2': [
+    {'1': 'success', '3': 1, '4': 1, '5': 8, '10': 'success'},
+  ],
+};
+
+/// Descriptor for `DeactivateAccountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deactivateAccountResponseDescriptor =
+    $convert.base64Decode(
+        'ChlEZWFjdGl2YXRlQWNjb3VudFJlc3BvbnNlEhgKB3N1Y2Nlc3MYASABKAhSB3N1Y2Nlc3M=');
+
+@$core.Deprecated('Use getProfileRequestDescriptor instead')
+const GetProfileRequest$json = {
+  '1': 'GetProfileRequest',
+  '2': [
+    {'1': 'user_id', '3': 1, '4': 1, '5': 3, '10': 'userId'},
+  ],
+};
+
+/// Descriptor for `GetProfileRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getProfileRequestDescriptor = $convert.base64Decode(
+    'ChFHZXRQcm9maWxlUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgDUgZ1c2VySWQ=');
+
+@$core.Deprecated('Use getProfileResponseDescriptor instead')
+const GetProfileResponse$json = {
+  '1': 'GetProfileResponse',
+  '2': [
+    {'1': 'user_id', '3': 1, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'dob_iso', '3': 4, '4': 1, '5': 9, '10': 'dobIso'},
+  ],
+};
+
+/// Descriptor for `GetProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getProfileResponseDescriptor = $convert.base64Decode(
+    'ChJHZXRQcm9maWxlUmVzcG9uc2USFwoHdXNlcl9pZBgBIAEoA1IGdXNlcklkEhQKBWVtYWlsGA'
+    'IgASgJUgVlbWFpbBISCgRuYW1lGAMgASgJUgRuYW1lEhcKB2RvYl9pc28YBCABKAlSBmRvYklz'
+    'bw==');
+
+@$core.Deprecated('Use updateProfileRequestDescriptor instead')
+const UpdateProfileRequest$json = {
+  '1': 'UpdateProfileRequest',
+  '2': [
+    {'1': 'user_id', '3': 1, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'dob_iso', '3': 4, '4': 1, '5': 9, '10': 'dobIso'},
+  ],
+};
+
+/// Descriptor for `UpdateProfileRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateProfileRequestDescriptor = $convert.base64Decode(
+    'ChRVcGRhdGVQcm9maWxlUmVxdWVzdBIXCgd1c2VyX2lkGAEgASgDUgZ1c2VySWQSFAoFZW1haW'
+    'wYAiABKAlSBWVtYWlsEhIKBG5hbWUYAyABKAlSBG5hbWUSFwoHZG9iX2lzbxgEIAEoCVIGZG9i'
+    'SXNv');
+
+@$core.Deprecated('Use updateProfileResponseDescriptor instead')
+const UpdateProfileResponse$json = {
+  '1': 'UpdateProfileResponse',
+  '2': [
+    {'1': 'user_id', '3': 1, '4': 1, '5': 3, '10': 'userId'},
+    {'1': 'email', '3': 2, '4': 1, '5': 9, '10': 'email'},
+    {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'dob_iso', '3': 4, '4': 1, '5': 9, '10': 'dobIso'},
+  ],
+};
+
+/// Descriptor for `UpdateProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateProfileResponseDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVQcm9maWxlUmVzcG9uc2USFwoHdXNlcl9pZBgBIAEoA1IGdXNlcklkEhQKBWVtYW'
+    'lsGAIgASgJUgVlbWFpbBISCgRuYW1lGAMgASgJUgRuYW1lEhcKB2RvYl9pc28YBCABKAlSBmRv'
+    'Yklzbw==');
+
 @$core.Deprecated('Use workoutLogMessageDescriptor instead')
 const WorkoutLogMessage$json = {
   '1': 'WorkoutLogMessage',
