@@ -83,6 +83,7 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
     _channel = createChannel();
     _stub = UserServiceClient(_channel);
     _userEmailOverride = widget.email;
+    _loadProfile();
     _loadLogs();
   }
 
@@ -92,6 +93,31 @@ class _WorkoutLogPageState extends State<WorkoutLogPage> {
     _channel.shutdown();
     super.dispose();
   }
+  Future<void> _loadProfile() async {
+  try {
+    final resp = await _stub.getProfile(
+      GetProfileRequest(
+        userId: fixnum.Int64(widget.userId),
+      ),
+    );
+
+    setState(() {
+      final trimmedName = resp.name.trim();
+      _userName = trimmedName.isEmpty ? null : trimmedName;
+      _userEmailOverride = resp.email;
+
+      if (resp.dobIso.isNotEmpty) {
+        _dob = DateTime.parse(resp.dobIso);
+      } else {
+        _dob = null;
+      }
+    });
+  } catch (e) {
+    setState(() {
+      _status = 'Failed to load profile: $e';
+    });
+  }
+}
 
   Future<void> _loadLogs() async {
     setState(() {

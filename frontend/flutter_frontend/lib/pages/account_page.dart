@@ -89,14 +89,64 @@ class _AccountPageState extends State<AccountPage> {
     }
   }
 
-  void _save() {
-    Navigator.of(context).pop(
-      AccountPageResult(
-        name: _nameController.text.trim(),
-        email: _emailController.text.trim(),
-        dob: _dob,
-      ),
-    );
+  Future<void> _save() async {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+
+    setState(() {
+      _isLoading = true;
+      _status = '';
+    });
+
+    try {
+      final dobIso = _dob == null
+          ? ''
+          : '${_dob!.year.toString().padLeft(4, '0')}-'
+            '${_dob!.month.toString().padLeft(2, '0')}-'
+            '${_dob!.day.toString().padLeft(2, '0')}';
+
+      final resp = await _stub.updateProfile(
+        UpdateProfileRequest(
+          userId: fixnum.Int64(widget.userId),
+          email: email,
+          name: name,
+          dobIso: dobIso,
+        ),
+      );
+
+      final returnedName = resp.name.trim();
+      final effectiveName =
+          returnedName.isEmpty ? null : returnedName;
+
+      final returnedEmail = resp.email.trim();
+      final effectiveEmail =
+          returnedEmail.isEmpty ? null : returnedEmail;
+
+      DateTime? returnedDob;
+      if (resp.dobIso.isNotEmpty) {
+        returnedDob = DateTime.parse(resp.dobIso);
+      }
+
+      if (!mounted) return;
+
+      Navigator.of(context).pop(
+        AccountPageResult(
+          name: effectiveName,
+          email: effectiveEmail,
+          dob: returnedDob,
+        ),
+      );
+    } catch (e) {
+      setState(() {
+        _status = 'Failed to save profile: $e';
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   Future<void> _deactivate() async {
